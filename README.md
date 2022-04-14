@@ -3,7 +3,7 @@
 ## Target
 Use Python and SQLAlchemy to do basic climate analysis and data exploration of giveb climate database. All analysis were completed using `SQLAlchemy ORM queries`, `Pandas`, and `Matplotlib`.<br/>
 
-## Step by Step Approach
+## Step 1 - Climate Analysis and Exploration
 * Use SQLAlchemy `create_engine` to connect to your sqlite database.<br/>
 
 * Use SQLAlchemy `automap_base()` to reflect your tables into classes and save a reference to those classes called `Station` and `Measurement`.<br/>
@@ -11,8 +11,6 @@ Use Python and SQLAlchemy to do basic climate analysis and data exploration of g
 * Link Python to the database by creating an SQLAlchemy session.<br/>
 <br/>
 
-
-## Step 1 - Climate Analysis and Exploration
 ### Task 1 - Precipitation Analysis
 
 * Finding the most recent date in the data set.<br/>
