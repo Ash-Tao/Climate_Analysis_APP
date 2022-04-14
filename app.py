@@ -49,7 +49,7 @@ def welcome():
 
 @app.route("/api/v1.0/precipitation")
 def precipitation():
-    #onvert the query results to a dictionary using date as the key and prcp as the value.
+    #Convert the query results to a dictionary using date as the key and prcp as the value.
     #Return the JSON representation of your dictionary.
        session = Session(bind=engine)
        precipitation = session.query(Measurement.date, func.sum(Measurement.prcp)).\
