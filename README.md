@@ -24,7 +24,7 @@ Use Python and SQLAlchemy to do basic climate analysis and data exploration of g
 * Sort the DataFrame values by `date`.<br/>
 
 * Plot the results.<br/>
- <img src="https://github.com/Ash-Tao/sql-challenge/blob/main/EmployeeSQL/ERD_QuickDBD/ERD_QuickDBD-EmployeeSQL.png"><br/>
+  <img src="https://github.com/Ash-Tao/sqlalchemy-challenge/blob/main/Output/Precipitation%20(2016-08-24%20-%202017-08-23).png"><br/>
 
 * Use Pandas to print the summary statistics for the precipitation data.<br/>
 
@@ -35,6 +35,9 @@ Use Python and SQLAlchemy to do basic climate analysis and data exploration of g
 * Find the most active stations.<br/>
 
 * Retrieve the last 12 months of temperature observation data (TOBS).<br/>
+
+* Plot the results.<br/>
+  <img src=https://github.com/Ash-Tao/sqlalchemy-challenge/blob/main/Output/Temperature%20Observation%20(2016-08-24%20-%202017-08-23).png><br/>
 
 * Use Pandas to print the summary statistics for the precipitation data.<br/>
 
@@ -98,7 +101,7 @@ __Conclusion:__<br/>
     * Use "Trip Avg Temp" as the title.<br/>
     * Use the average temperature as the bar height (y value).<br/>
     * Use the peak-to-peak (TMAX-TMIN) value as the y error bar (YERR).<br/>
-    <img src="https://github.com/Ash-Tao/sql-challenge/blob/main/EmployeeSQL/ERD_QuickDBD/ERD_QuickDBD-EmployeeSQL.png"><br/>
+      <img src="https://github.com/Ash-Tao/sqlalchemy-challenge/blob/main/Output/Trip%20Avg%20Temp%20(2016-08-01%20-%202016-08-07).png"><br/>
 * Daily Rainfall Average<br/>
 > Calculate the rainfall per weather station using the previous year's matching dates.<br/>
   * Sort this in descending order by precipitation amount and list the station, name, latitude, longitude, and elevation.<br/>
@@ -111,7 +114,7 @@ __Conclusion:__<br/>
   * Use the `daily_normals` function to calculate the normals for each date string and append the results to a list called `normals`.<br/>
 * Load the list of daily normals into a Pandas DataFrame and set the index equal to the date.<br/>
 * Use Pandas to plot an area plot (`stacked=False`) for the daily normals.<br/>
-    <img src="https://github.com/Ash-Tao/sql-challenge/blob/main/EmployeeSQL/ERD_QuickDBD/ERD_QuickDBD-EmployeeSQL.png"><br/>
+  <img src="https://github.com/Ash-Tao/sqlalchemy-challenge/blob/main/Output/Daily%20Temperature%20Normals%20(2016-08-01%20-%202016-08-07).png"><br/>
 * Close out your session.<br/>
 
 ### Files
