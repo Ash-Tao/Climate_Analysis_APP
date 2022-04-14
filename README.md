@@ -94,18 +94,18 @@ __Conclusion:__<br/>
 ### Temperature Analysis II
 
 * Find out what the temperature has previously looked like.<br/>
-> Use the `calc_temps` function to calculate the min, avg, and max temperatures for your trip using the matching dates from a previous year (i.e., use "2017-08-01").<br/>
+  > Use the `calc_temps` function to calculate the min, avg, and max temperatures for your trip using the matching dates from a previous year (i.e., use "2017-08-01").<br/>
   * Plot the min, avg, and max temperature as a bar chart.<br/>
     * Use "Trip Avg Temp" as the title.<br/>
     * Use the average temperature as the bar height (y value).<br/>
     * Use the peak-to-peak (TMAX-TMIN) value as the y error bar (YERR).<br/>
       <img src="https://github.com/Ash-Tao/sqlalchemy-challenge/blob/main/Output/Trip%20Avg%20Temp%20(2016-08-01%20-%202016-08-07).png"><br/>
 * Daily Rainfall Average<br/>
-> Calculate the rainfall per weather station using the previous year's matching dates.<br/>
+  > Calculate the rainfall per weather station using the previous year's matching dates.<br/>
   * Sort this in descending order by precipitation amount and list the station, name, latitude, longitude, and elevation.<br/>
 
 * Daily Temperature Normals<br/>
-> Use the `daily_normals` function to calculate the averages for the min, avg, and max temperatures for your trip using the matching dates from a previous year. This date string will be in the format `%m-%d`.<br/>
+  > Use the `daily_normals` function to calculate the averages for the min, avg, and max temperatures for your trip using the matching dates from a previous year. This date string will be in the format `%m-%d`.<br/>
   * Set the start and end date of the trip.<br/>
   * Use the date to create a range of dates.<br/>
   * Strip off the year and save a list of strings in the format `%m-%d`.<br/>
