@@ -115,13 +115,14 @@ __Conclusion:__<br/>
 * Close out your session.<br/>
 
 ### Files
-- [SQL Database](https://github.com/Ash-Tao/sql-challenge/tree/main/EmployeeSQL/SQL_database)<br/>
-  - DataAnalysis_Queries.sql<br/>
-  - schemas.sql<br/>
-- [Jupyter Notebook](https://github.com/Ash-Tao/sql-challenge/tree/main/EmployeeSQL/Jupyter)<br/>
-  - Employee.ipynb<br/>
-  - Average Salary by Title.png<br/>
-  - The Most Common Salary Ranges for Employees(every $1,000).png(3 plots)<br/>
-- [ERD_QuickDBD](https://github.com/Ash-Tao/sql-challenge/tree/main/EmployeeSQL/ERD_QuickDBD)<br/>
-  - ERD_QuickDBD-EmployeeSQL.png
-  - ERD_QuickDBD-EmployeeSQL.sql
+- [Output](https://github.com/Ash-Tao/sqlalchemy-challenge/tree/main/Output)<br/>
+  - Precipitation (2016-08-24 - 2017-08-23).png<br/>
+  - Temperature Observation (2016-08-24 - 2017-08-23).png<br/>
+  - Daily Temperature Normals (2016-08-01 - 2016-08-07).png<br/>
+  - Daily Temperature Normals (2016-08-01 - 2016-08-07).png<br/>
+
+- [Jupyter Notebook](https://github.com/Ash-Tao/sqlalchemy-challenge/tree/main/Jupyter%20Notebook)<br/>
+  - climate.ipynb<br/>
+  - temp_analysis_bonus_1.ipynb<br/>
+  - temp_analysis_bonus_w.ipynb<br/>
+- [Climate App](https://github.com/Ash-Tao/sqlalchemy-challenge/blob/main/app.py)<br/>
