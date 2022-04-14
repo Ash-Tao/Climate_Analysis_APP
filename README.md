@@ -11,176 +11,121 @@ Use Python and SQLAlchemy to do basic climate analysis and data exploration of g
 * Link Python to the database by creating an SQLAlchemy session.<br/>
 <br/>
 
+
+## Step 1 - Climate Analysis and Exploration
 ### Task 1 - Precipitation Analysis
 
-* Finding the most recent date in the data set - 
+* Finding the most recent date in the data set.<br/>
 
-* Retrieve the last 12 months of precipitation data by querying the 12 preceding months of data. **Note** you do not pass in the date as a variable to your query.
+* Retrieve the last 12 months of precipitation data.<br/>
 
-* Select only the `date` and `prcp` values.
+* Load the query for selecting only the `date` and `prcp` values into a Pandas DataFrame and set the index to the date column.<br/>
 
-* Load the query results into a Pandas DataFrame and set the index to the date column.
+* Sort the DataFrame values by `date`.<br/>
 
-* Sort the DataFrame values by `date`.
+* Plot the results.<br/>
+ <img src="https://github.com/Ash-Tao/sql-challenge/blob/main/EmployeeSQL/ERD_QuickDBD/ERD_QuickDBD-EmployeeSQL.png"><br/>
 
-* Plot the results using the DataFrame `plot` method.
+* Use Pandas to print the summary statistics for the precipitation data.<br/>
 
-  ![precipitation](Images/precipitation.png)
+### Task 2 - Station Analysis
 
-* Use Pandas to print the summary statistics for the precipitation data.
+* Find the total number of stations in the dataset.<br/>
 
-### Station Analysis
+* Find the most active stations.<br/>
 
-* Design a query to calculate the total number of stations in the dataset.
+* Retrieve the last 12 months of temperature observation data (TOBS).<br/>
 
-* Design a query to find the most active stations (i.e. which stations have the most rows?).
+* Use Pandas to print the summary statistics for the precipitation data.<br/>
 
-  * List the stations and observation counts in descending order.
-
-  * Which station id has the highest number of observations?
-
-  * Using the most active station id, calculate the lowest, highest, and average temperature.
-
-  * Hint: You will need to use a function such as `func.min`, `func.max`, `func.avg`, and `func.count` in your queries.
-
-* Design a query to retrieve the last 12 months of temperature observation data (TOBS).
-
-  * Filter by the station with the highest number of observations.
-
-  * Query the last 12 months of temperature observation data for this station.
-
-  * Plot the results as a histogram with `bins=12`.
-
-    ![station-histogram](Images/station-histogram.png)
-
-* Close out your session.
-
-- - -
+* Close out your session.<br/>
+<br/>
 
 ## Step 2 - Climate App
 
-Now that you have completed your initial analysis, design a Flask API based on the queries that you have just developed.
-
-* Use Flask to create your routes.
+* Use Flask to create your routes.<br/>
 
 ### Routes
 
-* `/`
+* `/`<br/>
+  * Home page.<br/>
+  * List all routes that are available.<br/>
 
-  * Home page.
-
-  * List all routes that are available.
-
-* `/api/v1.0/precipitation`
-
-  * Convert the query results to a dictionary using `date` as the key and `prcp` as the value.
-
-  * Return the JSON representation of your dictionary.
+* `/api/v1.0/precipitation`<br/>
+  * Returns the jsonified precipitation data for the last year in the database.<br/>
+  * Use `date` as the key and `prcp` as the value.<br/>
+  * Return the JSON representation of your dictionary.<br/>
 
 * `/api/v1.0/stations`
-
-  * Return a JSON list of stations from the dataset.
+  * Returns jsonified data of all of the stations in the database.<br/>
 
 * `/api/v1.0/tobs`
-  * Query the dates and temperature observations of the most active station for the last year of data.
+  * Returns jsonified data for the most active station (USC00519281) for the last year of data.<br/>
 
-  * Return a JSON list of temperature observations (TOBS) for the previous year.
-
-* `/api/v1.0/<start>` and `/api/v1.0/<start>/<end>`
-
-  * Return a JSON list of the minimum temperature, the average temperature, and the max temperature for a given start or start-end range.
-
-  * When given the start only, calculate `TMIN`, `TAVG`, and `TMAX` for all dates greater than and equal to the start date.
-
-  * When given the start and the end date, calculate the `TMIN`, `TAVG`, and `TMAX` for dates between the start and end date inclusive.
-
-## Hints
-
-* You will need to join the station and measurement tables for some of the queries.
-
-* Use Flask `jsonify` to convert your API data into a valid JSON response object.
+* `/api/v1.0/<start>` and `/api/v1.0/<start>/<end>`<br/>
+  * Return a JSON list of the minimum temperature, the average temperature, and the max temperature for a given start or start-end range.<br/>
+  * When given the start only, calculate `TMIN`, `TAVG`, and `TMAX` for all dates greater than and equal to the start date.<br/>
+  * When given the start and the end date, calculate the dates between the start and end date inclusive.<br/>
+<br/>
 
 - - -
 
-## Bonus: Other Recommended Analyses
-
-* The following are optional challenge queries. These are highly recommended to attempt, but not required for the homework.
-
-* Use the provided [temp_analysis_bonus_1_starter.ipynb](temp_analysis_bonus_1_starter.ipynb) and [temp_analysis_bonus_2_starter.ipynb](temp_analysis_bonus_2_starter.ipynb) starter notebooks for each bonus challenge.
+## Bonus: Other Analyses
 
 ### Temperature Analysis I
 
-* Hawaii is reputed to enjoy mild weather all year. Is there a meaningful difference between the temperature in, for example, June and December?
+__Conclusion:__<br/>
+> I will use a paired t-test as we compared the means of the same group. And the lower the p-value, the less likely the results are due purely to chance. i.e. in this case, the mean temperature observations are of the same stations, just for different time points. <br/>
+> The null hypothesis (H0): The mean of the paired differences equals zero in the population. <br/>
+> The alternative hypothesis (H1): The mean of the paired differences does not equal zero in the population.<br/>
+> he p-value,pvalue=3.9025129038616655e-191, I got from the calculation is less than 0.05.<br/>
+> If a p-value < 0.05, we should reject the null hypothesis and __accept the alternative hypothesis__.<br/>
+> In other words, there is a meaningful difference between the June and December temperatures in Hawaii. This difference has very little to do with the random sampling itself. The variance obtained from the sample is consistent with the actual weather conditions in Hawaii.<br/>
 
-* Use pandas to perform this portion.
+* Use pandas to perform this portion.<br/>
+  * Convert the date column format from string to datetime.<br/>
+  * Set the date column as the DataFrame index<br/>
+  * Drop the date column<br/>
 
-  * Convert the date column format from string to datetime.
+* Identify the average temperature in June at all stations across all available years in the dataset. Repeat on December temperature.<br/>
 
-  * Set the date column as the DataFrame index
-
-  * Drop the date column
-
-* Identify the average temperature in June at all stations across all available years in the dataset. Do the same for December temperature.
-
-* Use the t-test to determine whether the difference in the means, if any, is statistically significant. Will you use a paired t-test, or an unpaired t-test? Why?
+* Use the t-test to determine whether the difference in the means, if any, is statistically significant.<br/>
 
 ### Temperature Analysis II
 
-* You are looking to take a trip from August first to August seventh of this year, but are worried that the weather will be less than ideal. Using historical data in the dataset find out what the temperature has previously looked like.
+* Find out what the temperature has previously looked like.<br/>
+> Use the `calc_temps` function to calculate the min, avg, and max temperatures for your trip using the matching dates from a previous year (i.e., use "2017-08-01").<br/>
+  * Plot the min, avg, and max temperature as a bar chart.<br/>
+    * Use "Trip Avg Temp" as the title.<br/>
+    * Use the average temperature as the bar height (y value).<br/>
+    * Use the peak-to-peak (TMAX-TMIN) value as the y error bar (YERR).<br/>
+    <img src="https://github.com/Ash-Tao/sql-challenge/blob/main/EmployeeSQL/ERD_QuickDBD/ERD_QuickDBD-EmployeeSQL.png"><br/>
 
-* The starter notebook contains a function called `calc_temps` that will accept a start date and end date in the format `%Y-%m-%d`. The function will return the minimum, average, and maximum temperatures for that range of dates.
-
-* Use the `calc_temps` function to calculate the min, avg, and max temperatures for your trip using the matching dates from a previous year (i.e., use "2017-08-01").
-
-* Plot the min, avg, and max temperature from your previous query as a bar chart.
-
-  * Use "Trip Avg Temp" as the title.
-
-  * Use the average temperature as the bar height (y value).
-
-  * Use the peak-to-peak (TMAX-TMIN) value as the y error bar (YERR).
-
-    ![temperature](Images/temperature.png)
-
-### Daily Rainfall Average
-
-* Now that you have an idea of the temperature lets check to see what the rainfall has been, you don't want a when it rains the whole time!
-
-* Calculate the rainfall per weather station using the previous year's matching dates.
-
-  * Sort this in descending order by precipitation amount and list the station, name, latitude, longitude, and elevation.
+* Daily Rainfall Average<br/>
+> Calculate the rainfall per weather station using the previous year's matching dates.<br/>
+  * Sort this in descending order by precipitation amount and list the station, name, latitude, longitude, and elevation.<br/>
 
 
-### Daily Temperature Normals
+* Daily Temperature Normals<br/>
+> Use the `daily_normals` function to calculate the averages for the min, avg, and max temperatures for your trip using the matching dates from a previous year. This date string will be in the format `%m-%d`.<br/>
+  * Set the start and end date of the trip.<br/>
+  * Use the date to create a range of dates.<br/>
+  * Strip off the year and save a list of strings in the format `%m-%d`.<br/>
+  * Use the `daily_normals` function to calculate the normals for each date string and append the results to a list called `normals`.<br/>
+* Load the list of daily normals into a Pandas DataFrame and set the index equal to the date.<br/>
+* Use Pandas to plot an area plot (`stacked=False`) for the daily normals.<br/>
+    <img src="https://github.com/Ash-Tao/sql-challenge/blob/main/EmployeeSQL/ERD_QuickDBD/ERD_QuickDBD-EmployeeSQL.png"><br/>
 
-* Calculate the daily normals for the duration of your trip. Normals are the averages for the min, avg, and max temperatures. You are provided with a function called `daily_normals` that will calculate the daily normals for a specific date. This date string will be in the format `%m-%d`. Be sure to use all historic TOBS that match that date string.
+* Close out your session.<br/>
 
-  * Set the start and end date of the trip.
-
-  * Use the date to create a range of dates.
-
-  * Strip off the year and save a list of strings in the format `%m-%d`.
-
-  * Use the `daily_normals` function to calculate the normals for each date string and append the results to a list called `normals`.
-
-* Load the list of daily normals into a Pandas DataFrame and set the index equal to the date.
-
-* Use Pandas to plot an area plot (`stacked=False`) for the daily normals.
-
-  ![daily-normals](Images/daily-normals.png)
-
-* Close out your session.
-
-## Rubric
-
-[Unit 10 Rubric - SQLAlchemy Homework - Surfs Up!](https://docs.google.com/document/d/1gT29iMF3avSvJruKpcHY4qovP5QitgXePqtjC6XESI0/edit?usp=sharing)
-
-- - -
-
-## References
-
-Menne, M.J., I. Durre, R.S. Vose, B.E. Gleason, and T.G. Houston, 2012: An overview of the Global Historical Climatology Network-Daily Database. Journal of Atmospheric and Oceanic Technology, 29, 897-910, [https://doi.org/10.1175/JTECH-D-11-00103.1](https://doi.org/10.1175/JTECH-D-11-00103.1)
-
-- - -
-
-© 2021 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
+### Files
+- [SQL Database](https://github.com/Ash-Tao/sql-challenge/tree/main/EmployeeSQL/SQL_database)<br/>
+  - DataAnalysis_Queries.sql<br/>
+  - schemas.sql<br/>
+- [Jupyter Notebook](https://github.com/Ash-Tao/sql-challenge/tree/main/EmployeeSQL/Jupyter)<br/>
+  - Employee.ipynb<br/>
+  - Average Salary by Title.png<br/>
+  - The Most Common Salary Ranges for Employees(every $1,000).png(3 plots)<br/>
+- [ERD_QuickDBD](https://github.com/Ash-Tao/sql-challenge/tree/main/EmployeeSQL/ERD_QuickDBD)<br/>
+  - ERD_QuickDBD-EmployeeSQL.png
+  - ERD_QuickDBD-EmployeeSQL.sql
