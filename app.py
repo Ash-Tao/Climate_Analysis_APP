@@ -51,7 +51,7 @@ def welcome():
 def precipitation():
     #onvert the query results to a dictionary using date as the key and prcp as the value.
     #Return the JSON representation of your dictionary.
-       session = Session(engine)
+       session = Session(bind=engine)
        precipitation = session.query(Measurement.date, func.sum(Measurement.prcp)).\
        filter(func.strftime(Measurement.date)>=(datetime.datetime.strptime(\
        session.query(func.max(Measurement.date))[0][0],"%Y-%m-%d")- relativedelta(years=1))).\
@@ -71,15 +71,19 @@ def precipitation():
 def stations():
     # Return a JSON list of stations from the dataset.
 
-    session = Session(engine)
-    stations = session.query(Station.station,Station.name).all()
+    session = Session(bind=engine)
+    sel = [Station.station,Station.name,Station.latitude,Station.longitude,Station.elevation]
+    stations = session.query(*sel).all()
 
     session.close()
     station_list = []
-    for station, name in stations:
+    for station,name,latitude,latitude,elevation in stations:
         station_dict = {}
         station_dict["Station"] = station
         station_dict["Name"] = name
+        station_dict["Latitude"] = latitude
+        station_dict["Longitude"] = latitude
+        station_dict["Elevation"] = elevation
         station_list.append(station_dict)
 
     return jsonify(station_list)
@@ -89,7 +93,7 @@ def tobs():
     # Query the dates and temperature observations of the most active station for the last year of data.
     # Return a JSON list of temperature observations (TOBS) for the previous year.
     
-    session = Session(engine)
+    session = Session(bind=engine)
     
     most_recent_date = session.query(func.max(Measurement.date)).all()
     end_date=datetime.datetime.strptime(most_recent_date[0][0],"%Y-%m-%d")
@@ -109,7 +113,7 @@ def tobs():
 def start_date(start):
     # When given the start only, calculate TMIN, TAVG, and TMAX for all dates greater than and equal to the start date.
     
-    session = Session(engine)
+    session = Session(bind=engine)
 
     canonicalized=datetime.datetime.strptime(start,"%Y-%m-%d")
     lowest_tobs = session.query(Measurement.date,func.min(Measurement.tobs)).\
@@ -133,7 +137,7 @@ def start_date(start):
 def start_end_date(start,end):
     # When given the start and the end date, calculate the TMIN, TAVG, and TMAX for dates between the start and end date inclusive.
 
-    session = Session(engine)
+    session = Session(bind=engine)
 
     canonicalized_start=datetime.datetime.strptime(start,"%Y-%m-%d")
     canonicalized_end=datetime.datetime.strptime(end,"%Y-%m-%d")
