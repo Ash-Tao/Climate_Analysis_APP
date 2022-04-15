@@ -11,6 +11,8 @@ from sqlalchemy import create_engine, func
 
 from flask import Flask, jsonify
 
+from sqlalchemy import or_
+
 
 #################################################
 # Database Setup
@@ -115,7 +117,8 @@ def start_date(start):
     
     session = Session(bind=engine)
 
-    canonicalized=datetime.datetime.strptime(start,"%Y-%m-%d")
+    canonicalized=datetime.datetime.strptime(start,"%Y-%m-%d")-datetime.timedelta(days=1)
+    
     lowest_tobs = session.query(Measurement.date,func.min(Measurement.tobs)).\
         filter(func.strftime(Measurement.date) >= canonicalized).all()
     highest_tobs = session.query(Measurement.date,func.max(Measurement.tobs)).\
@@ -139,18 +142,18 @@ def start_end_date(start,end):
 
     session = Session(bind=engine)
 
-    canonicalized_start=datetime.datetime.strptime(start,"%Y-%m-%d")
+    canonicalized_start=datetime.datetime.strptime(start,"%Y-%m-%d")-datetime.timedelta(days=1)
     canonicalized_end=datetime.datetime.strptime(end,"%Y-%m-%d")
 
     lowest_tobs = session.query(Measurement.date,func.min(Measurement.tobs)).\
         filter(func.strftime(Measurement.date) >= canonicalized_start).\
-        filter(func.strftime(Measurement.date) >= canonicalized_end).all()
+        filter(func.strftime(Measurement.date) <= canonicalized_end).all()
     highest_tobs = session.query(Measurement.date,func.max(Measurement.tobs)).\
         filter(func.strftime(Measurement.date) >= canonicalized_start).\
-        filter(func.strftime(Measurement.date) >= canonicalized_end).all()
+        filter(func.strftime(Measurement.date) <= canonicalized_end).all()
     avg_tobs = session.query(Measurement.date,func.avg(Measurement.tobs)).\
         filter(func.strftime(Measurement.date) >= canonicalized_start).\
-        filter(func.strftime(Measurement.date) >= canonicalized_end).all()
+        filter(func.strftime(Measurement.date) <= canonicalized_end).all()
     
     session.close()
     
