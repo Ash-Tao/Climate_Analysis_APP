@@ -128,7 +128,7 @@ def start_date(start):
     tob_list=[
         {"Lowest Tobs":lowest_tobs[0][1]},
         {"Highest Tobs":highest_tobs[0][1]},
-        {"Average Tobs":round(avg_tobs[0][1],2)}
+        {"Average Tobs":avg_tobs[0][1]}
     ]
     return jsonify(tob_list)
 
@@ -157,7 +157,7 @@ def start_end_date(start,end):
     tob_list=[
         {"Lowest Tobs":lowest_tobs[0][1]},
         {"Highest Tobs":highest_tobs[0][1]},
-        {"Average Tobs":round(avg_tobs[0][1],2)}
+        {"Average Tobs":avg_tobs[0][1]}
     ]
     return jsonify(tob_list)
 
