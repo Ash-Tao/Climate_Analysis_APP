@@ -1,4 +1,4 @@
-# SQLAlchemy-challenge
+# Climate_Analysis_APP
 
 ## Target
 Use Python and SQLAlchemy to do basic climate analysis and data exploration of giveb climate database. All analysis were completed using `SQLAlchemy ORM queries`, `Pandas`, and `Matplotlib`.<br/>
